@@ -1,10 +1,9 @@
-/** @format */
+import { Routes, Route, Link } from 'react-router-dom'
+import React from 'react'
+import Homepage from './pages/Homepage'
+import Productpage from './pages/Productpage'
 
-import { Routes, Route, Link } from "react-router-dom";
-import Homepage from "./pages/Homepage";
-import Productpage from "./pages/Productpage";
-
-import "./App.css";
+import './App.css'
 
 function App() {
   return (
@@ -23,7 +22,7 @@ function App() {
         <Route path="/products" element={<Productpage />} />
       </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
