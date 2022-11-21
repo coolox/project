@@ -6,10 +6,10 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    'plugin:prettier/recommended',
-    'prettier',
     'plugin:react/jsx-runtime',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
+    'plugin:prettier/recommended',
+    'prettier'
   ],
 
   overrides: [],
