@@ -1,5 +1,4 @@
 body {
-  margin: 0;
   padding: 0;
 }
 
@@ -12,13 +11,23 @@ header {
   padding: 10px;
 }
 
+table {
+  margin: 0;
+  padding: 0;
+}
 .link {
   text-decoration: none;
   color: white;
   margin: 5px;
 }
-table,
-th,
-tr {
-  border: 1px solid black;
+.cell-link {
+  text-decoration: none;
 }
+table,
+tr,
+th {
+  border: 1px solid black;
+  text-align: center;
+    border-collapse: collapse;
+}
+  

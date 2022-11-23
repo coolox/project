@@ -1,5 +1,5 @@
-import { Routes, Route, Link } from 'react-router-dom'
 import React from 'react'
+import { Routes, Route, Link } from 'react-router-dom'
 import Homepage from './pages/Homepage'
 import Productpage from './pages/Productpage'
 
@@ -19,7 +19,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/products" element={<Productpage />} />
+        <Route path="/:id" element={<Productpage />} />
       </Routes>
     </div>
   )

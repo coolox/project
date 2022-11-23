@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 function Homepage() {
   const [data, setData] = useState([])
@@ -11,23 +12,33 @@ function Homepage() {
   }, [])
   return (
     <>
-      <h1>Homepage</h1>
-      <table className="table">
+      <h1>Products Table</h1>
+      <table className="cell">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>User Id</th>
-            <th>Title</th>
-            <th>Body</th>
+            <th className="cell">Id</th>
+            <th className="cell">User Id</th>
+            <th className="cell">Title</th>
+            <th className="cell">Body</th>
           </tr>
         </thead>
         <tbody>
           {data.map(el => (
             <tr key={el.id}>
-              <th key={el.id + 'Id'}>{el.id}</th>
-              <th key={el.id + 'userId'}>{el.userId}</th>
-              <th key={el.id + 'title'}>{el.title}</th>
-              <th key={el.id + 'body'}>{el.body}</th>
+              <th key={el.id + 'Id'} className="cell">
+                {el.id}
+              </th>
+              <th key={el.id + 'userId'} className="cell">
+                {el.userId}
+              </th>
+              <Link key={el.id + 'link'} to={`/${el.id}`} className="cell">
+                <p key={el.id + 'title'} className="cell">
+                  {el.title}
+                </p>
+              </Link>
+              <th key={el.id + 'body'} className="cell">
+                {el.body}
+              </th>
             </tr>
           ))}
         </tbody>
