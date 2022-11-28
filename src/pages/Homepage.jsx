@@ -4,19 +4,23 @@ import { useEffect, useState } from 'react'
 function Homepage() {
   const url = './mock/data.json'
   const [data, setData] = useState([])
+  function formatObjToArr(obj) {
+    return Object.entries(obj).reduce((accum, [key, value]) => {
+      const normalizedItem = {
+        ...value,
+        id: key
+      }
+      accum.push(normalizedItem)
+      return accum
+    }, [])
+  }
+
   useEffect(() => {
     fetch(url)
       .then(response => response.json())
-      .then(data => {
-        const accum = []
-        for (let [key, value] of Object.entries(data)) {
-          value.id = key
-          accum.push(value)
-        }
-        return accum
-      })
-      .then(res => setData(res))
-      .catch(e => console.error(e))
+      .then(json => formatObjToArr(json))
+      .then(normalizedItems => setData(normalizedItems))
+      .catch(err => console.error(err))
   }, [])
 
   console.log(data)
