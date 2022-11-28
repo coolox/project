@@ -18,8 +18,8 @@ function Homepage() {
   useEffect(() => {
     fetch(url)
       .then(response => response.json())
-      .then(json => formatObjToArr(json))
-      .then(normalizedItems => setData(normalizedItems))
+      .then(obj => formatObjToArr(obj))
+      .then(arrOfObj => setData(arrOfObj))
       .catch(err => console.error(err))
   }, [])
 
