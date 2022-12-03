@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
 body {
   margin: 0;
   padding: 0;
+  background: #697cbc;
 }
 
 h1,
@@ -8,18 +14,9 @@ h2,
 h3,
 h4 {
   text-align: center;
-}
-
-header {
-  background-color: #363636;
-  padding: 10px;
-}
-
-.link {
-  text-decoration: none;
   color: white;
-  margin: 5px;
 }
+
 .table-link {
   text-decoration: none;
   color: black;
@@ -27,11 +24,20 @@ header {
 
 .back-link {
   text-decoration: none;
-  color: black;
-  margin: 300px;
-  border: 1px solid black;
+  color: white;
+    margin-left: 300px;
+    border: 1px solid white;
   border-radius: 5px;
   padding: 2px 5px;
+}
+.back-link:hover {
+  background: #3a4569;
+  border: 1px solid rgb(130, 130, 130);
+}
+
+.back-link:active {
+  background: #020202;
+  border: 1px solid rgb(130, 130, 130);
 }
 table {
   border-collapse: collapse;
@@ -46,19 +52,26 @@ table {
 table tbody tr {
   border-bottom: 1px solid #f3f3f3;
 }
+table tbody tr:hover {
+  font-weight: bold;
+}
 
-table tbody tr:nth-of-type(even) {
+table tbody tr:nth-of-type(odd) {
   background-color: #f3f3f3;
 }
 
+table tbody tr:nth-of-type(even) {
+  background-color: #cfd4e7;
+}
 table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  border-bottom: 2px solid #29314e;
 }
 
 thead tr {
-  background-color: #009879;
+  background-color: #29314e;
   color: #fff;
   font-weight: bold;
+  text-align: left;
 }
 
 table th,
@@ -68,4 +81,13 @@ table td {
 
 tbody {
   text-align: left;
+}
+.container {
+  margin: 25px;
+  padding: 20px;
+  background-color: #29314e;
+  margin: auto;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }

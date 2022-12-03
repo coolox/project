@@ -43,27 +43,27 @@ function Homepage() {
             <tr key={element.id}>
               <td key={element.id + 'id'}> {element.id} </td>
               <td key={element.Name}>
-                <Link key={element.id + element.id} to={`/products/${element.id}`} className={'table-link'}>
+                <Link key={element.id + element.id} to={`/${element.id}`} className={'table-link'}>
                   {element.Name}
                 </Link>
               </td>
               <td key={element.Surname}>
-                <Link key={'link' + element.Surname} to={`/products/${element.id}`} className={'table-link'}>
+                <Link key={'link' + element.Surname} to={`/${element.id}`} className={'table-link'}>
                   {element.Surname}
                 </Link>
               </td>
               <td key={element.City}>
-                <Link key={'link' + element.City} to={`/products/${element.id}`} className={'table-link'}>
+                <Link key={'link' + element.City} to={`/${element.id}`} className={'table-link'}>
                   {element.City}
                 </Link>
               </td>
               <td key={element.salary}>
-                <Link key={'link' + element.salary} to={`/products/${element.id}`} className={'table-link'}>
+                <Link key={'link' + element.salary} to={`/${element.id}`} className={'table-link'}>
                   {element.salary}
                 </Link>
               </td>
               <td key={element.Phone_no}>
-                <Link key={'link' + element.Phone_no} to={`/products/${element.id}`} className={'table-link'}>
+                <Link key={'link' + element.Phone_no} to={`/${element.id}`} className={'table-link'}>
                   {element.Phone_no}
                 </Link>
               </td>
