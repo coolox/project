@@ -20,7 +20,7 @@ function Homepage() {
     fetch(url)
       .then(response => response.json())
       .then(obj => formatObjToArr(obj))
-      .then(arrOfObj => setData(arrOfObj))
+      .then(products => setData(products))
       .catch(err => console.error(err))
   }, [])
 
@@ -47,26 +47,10 @@ function Homepage() {
                   {element.Name}
                 </Link>
               </td>
-              <td key={element.Surname}>
-                <Link key={'link' + element.Surname} to={`/${element.id}`} className={'table-link'}>
-                  {element.Surname}
-                </Link>
-              </td>
-              <td key={element.City}>
-                <Link key={'link' + element.City} to={`/${element.id}`} className={'table-link'}>
-                  {element.City}
-                </Link>
-              </td>
-              <td key={element.salary}>
-                <Link key={'link' + element.salary} to={`/${element.id}`} className={'table-link'}>
-                  {element.salary}
-                </Link>
-              </td>
-              <td key={element.Phone_no}>
-                <Link key={'link' + element.Phone_no} to={`/${element.id}`} className={'table-link'}>
-                  {element.Phone_no}
-                </Link>
-              </td>
+              <td key={element.Surname}>{element.Surname}</td>
+              <td key={element.City}>{element.City}</td>
+              <td key={element.salary}>{element.salary}</td>
+              <td key={element.Phone_no}>{element.Phone_no}</td>
             </tr>
           ))}
         </tbody>

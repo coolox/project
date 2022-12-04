@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 function Product() {
   const url = '../mock/data.json'
   const id = useParams()
-  const [data, setData] = useState([])
+  const [data, setData] = useState({})
 
   function formatObjToArr(obj) {
     return Object.entries(obj).reduce((accum, [key, value]) => {
@@ -18,16 +18,16 @@ function Product() {
     }, [])
   }
 
-  function searchArr(arr) {
-    return arr.find(obj => obj.id === id.id)
+  function findProduct(arr) {
+    return arr.find(item => item.id === id.id)
   }
 
   useEffect(() => {
     fetch(url)
       .then(response => response.json())
       .then(obj => formatObjToArr(obj))
-      .then(arrOfObj => searchArr(arrOfObj))
-      .then(searchResult => setData(searchResult))
+      .then(products => findProduct(products))
+      .then(product => setData(product))
       .catch(err => console.error(err))
   }, [])
 
