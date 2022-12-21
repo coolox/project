@@ -1,6 +1,8 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import up from '../img/up.png'
+import down from '../img/down.png'
 
 function Homepage() {
   const url = './mock/data.json'
@@ -8,32 +10,34 @@ function Homepage() {
   const [sortDirection, setSortDirection] = useState('asc')
   const [sortField, setSortField] = useState('')
 
-  function sortTable(sortField) {
+  function sortTableByField(id) {
     const sortDir = sortDirection === 'asc' ? 1 : -1
     const clonedData = data.concat()
-    clonedData.sort((a, b) => (a[sortField] > b[sortField] ? 1 * sortDir : -1 * sortDir))
+    clonedData.sort((a, b) => (a[id] > b[id] ? 1 * sortDir : -1 * sortDir))
 
     setData(clonedData)
     setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
-    setSortField(sortField)
+    setSortField(id)
   }
 
   function showSortDirection(row) {
-    return sortField === row && sortDirection === 'asc'
-      ? ' ' + String.fromCharCode(9662)
-      : sortField === row && sortDirection === 'desc'
-      ? ' ' + String.fromCharCode(9652)
-      : null
+    return sortField === row && sortDirection === 'asc' ? (
+      <img src={up} style={{ width: '15px' }} />
+    ) : sortField === row && sortDirection === 'desc' ? (
+      <img src={down} style={{ width: '15px' }} />
+    ) : null
   }
 
   function formatObjToArr(obj) {
     return Object.entries(obj).reduce((accum, [key, value]) => {
-      const normalizedItem = {
-        ...value,
-        id: +key
-      }
-      accum.push(normalizedItem)
-      return accum
+      if (parseInt(key)) {
+        const normalizedItem = {
+          ...value,
+          id: parseInt(key)
+        }
+        accum.push(normalizedItem)
+        return accum
+      } else return console.error(Error)
     }, [])
   }
 
@@ -51,27 +55,27 @@ function Homepage() {
       <table className="table">
         <thead>
           <tr>
-            <th onClick={sortTable.bind(null, 'id')}>
+            <th onClick={() => sortTableByField('id')}>
               id
               {showSortDirection('id')}
             </th>
-            <th onClick={sortTable.bind(null, 'Name')}>
+            <th onClick={() => sortTableByField('Name')}>
               Name
               {showSortDirection('Name')}
             </th>
-            <th onClick={sortTable.bind(null, 'Surname')}>
+            <th onClick={() => sortTableByField('Surname')}>
               Surname
               {showSortDirection('Surname')}
             </th>
-            <th onClick={sortTable.bind(null, 'City')}>
+            <th onClick={() => sortTableByField('City')}>
               City
               {showSortDirection('City')}
             </th>
-            <th onClick={sortTable.bind(null, 'salary')}>
+            <th onClick={() => sortTableByField('salary')}>
               Salary
               {showSortDirection('salary')}
             </th>
-            <th onClick={sortTable.bind(null, 'Phone_no')}>
+            <th onClick={() => sortTableByField('Phone_no')}>
               Phone no
               {showSortDirection('Phone_no')}
             </th>
