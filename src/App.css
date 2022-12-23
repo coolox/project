@@ -49,6 +49,9 @@ table {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
+table thead tr {
+  cursor: default;
+}
 table tbody tr {
   border-bottom: 1px solid #f3f3f3;
 }
