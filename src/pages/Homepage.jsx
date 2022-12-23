@@ -1,8 +1,8 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import up from '../img/up.png'
-import down from '../img/down.png'
+import imgUp from '../img/up.png'
+import imgDown from '../img/down.png'
 
 function Homepage() {
   const url = './mock/data.json'
@@ -22,22 +22,20 @@ function Homepage() {
 
   function showSortDirection(row) {
     return sortField === row && sortDirection === 'asc' ? (
-      <img src={up} style={{ width: '15px' }} />
+      <img src={imgUp} style={{ width: '15px' }} />
     ) : sortField === row && sortDirection === 'desc' ? (
-      <img src={down} style={{ width: '15px' }} />
+      <img src={imgDown} style={{ width: '15px' }} />
     ) : null
   }
 
   function formatObjToArr(obj) {
     return Object.entries(obj).reduce((accum, [key, value]) => {
-      if (parseInt(key)) {
-        const normalizedItem = {
-          ...value,
-          id: parseInt(key)
-        }
-        accum.push(normalizedItem)
-        return accum
-      } else return console.error(Error)
+      const normalizedItem = {
+        ...value,
+        id: +key
+      }
+      accum.push(normalizedItem)
+      return accum
     }, [])
   }
 
