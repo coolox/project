@@ -94,3 +94,13 @@ tbody {
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
+.pagination-row {
+  cursor: pointer;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+span {
+  margin: 10px;
+}
