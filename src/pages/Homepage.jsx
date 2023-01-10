@@ -6,32 +6,76 @@ import imgDown from '../img/down.png'
 
 function Homepage() {
   const url = './mock/data.json'
-  const itemsPerPage = 10
+  const itemsPerPage = 100
   const [data, setData] = useState([])
-  const [pageData, setPageData] = useState([])
   const [sortDirection, setSortDirection] = useState('asc')
   const [sortField, setSortField] = useState('id')
-  const [pagesQty, setPagesQty] = useState()
+  const [pageNumber, setPagesNumber] = useState(0)
 
-  function displayPageData(page = 0) {
-    let pageData = []
-    const firstElementOfPage = page * itemsPerPage
-    pageData = data.slice(firstElementOfPage, firstElementOfPage + itemsPerPage)
-    setPageData(pageData)
+  const visitedPage = pageNumber * itemsPerPage
+  const pageCount = Math.ceil(data.length / itemsPerPage)
+
+  const displayData = data.slice(visitedPage, visitedPage + itemsPerPage).map(element => {
+    return (
+      <tr key={element.id}>
+        <td key={element.id + 'id'}> {element.id} </td>
+        <td key={element.Name}>
+          <Link key={element.id + element.id} to={`/${element.id}`} className={'table-link'}>
+            {element.Name}
+          </Link>
+        </td>
+        <td key={element.Surname}>{element.Surname}</td>
+        <td key={element.City}>{element.City}</td>
+        <td key={element.salary}>{element.salary}</td>
+        <td key={element.Phone_no}>{element.Phone_no}</td>
+      </tr>
+    )
+  })
+
+  function nextBtnHandler() {
+    if (pageNumber == pageCount - 1) {
+      return setPagesNumber(pageCount - 1)
+    } else {
+      return setPagesNumber(pageNumber + 1)
+    }
+  }
+
+  function prevBtnHandler() {
+    if (pageNumber == 0) {
+      return setPagesNumber(0)
+    } else {
+      return setPagesNumber(pageNumber - 1)
+    }
+  }
+
+  function paginationBtnsHandler(page) {
+    setPagesNumber(page - 1)
   }
 
   function Pagination() {
-    console.log('pageQty:', pagesQty)
     const pages = []
-    for (let i = 1; i <= pagesQty; i++) {
+
+    for (let i = 1; i <= pageCount; i++) {
       pages.push(i)
     }
+
     const listItems = pages.map(page => (
-      <span onClick={() => displayPageData(page - 1)} key={page}>
+      <span onClick={() => paginationBtnsHandler(page)} className="paginationBtns" key={page}>
         {page}
       </span>
     ))
-    return <div>{listItems}</div>
+
+    return (
+      <div className="pagination">
+        <span onClick={prevBtnHandler} className="paginationBtns">
+          Prev
+        </span>
+        {listItems}
+        <span onClick={nextBtnHandler} className="paginationBtns">
+          Next
+        </span>
+      </div>
+    )
   }
 
   function sortTableByField(id) {
@@ -42,7 +86,6 @@ function Homepage() {
     setData(clonedData)
     setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
     setSortField(id)
-    displayPageData()
   }
 
   function showSortDirection(row) {
@@ -54,7 +97,6 @@ function Homepage() {
   }
 
   function formatObjToArr(obj) {
-    console.log('formatObjToArr')
     return Object.entries(obj).reduce((accum, [key, value]) => {
       const normalizedItem = {
         ...value,
@@ -69,18 +111,14 @@ function Homepage() {
     fetch(url)
       .then(response => response.json())
       .then(obj => formatObjToArr(obj))
-      .then(products => {
-        setData(products.slice(0, 50))
-        console.log('data', data)
-        setPagesQty(Math.ceil(data.length / itemsPerPage))
-      })
+      .then(products => setData(products))
       .catch(err => console.error(err))
   }, [])
 
   return (
     <>
       <h1>Data list</h1>
-      <div className="pagination-row">{<Pagination />}</div>
+      <Pagination />
       <table className="table">
         <thead>
           <tr>
@@ -110,22 +148,7 @@ function Homepage() {
             </th>
           </tr>
         </thead>
-        <tbody>
-          {pageData.map(element => (
-            <tr key={element.id}>
-              <td key={element.id + 'id'}> {element.id} </td>
-              <td key={element.Name}>
-                <Link key={element.id + element.id} to={`/${element.id}`} className={'table-link'}>
-                  {element.Name}
-                </Link>
-              </td>
-              <td key={element.Surname}>{element.Surname}</td>
-              <td key={element.City}>{element.City}</td>
-              <td key={element.salary}>{element.salary}</td>
-              <td key={element.Phone_no}>{element.Phone_no}</td>
-            </tr>
-          ))}
-        </tbody>
+        <tbody>{displayData}</tbody>
       </table>
     </>
   )
