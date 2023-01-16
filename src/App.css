@@ -94,3 +94,23 @@ tbody {
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
+.pagination {
+  margin: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.paginationBtns {
+  cursor: pointer;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #020513;
+  border-radius: 5px;
+  color: #020513;
+}
+
+.paginationBtns:hover {
+  color: white;
+  background-color: #020513;
+}

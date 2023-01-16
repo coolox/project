@@ -6,9 +6,77 @@ import imgDown from '../img/down.png'
 
 function Homepage() {
   const url = './mock/data.json'
+  const itemsPerPage = 100
   const [data, setData] = useState([])
   const [sortDirection, setSortDirection] = useState('asc')
-  const [sortField, setSortField] = useState('')
+  const [sortField, setSortField] = useState('id')
+  const [pageNumber, setPagesNumber] = useState(0)
+
+  const visitedPage = pageNumber * itemsPerPage
+  const pageCount = Math.ceil(data.length / itemsPerPage)
+
+  const displayData = data.slice(visitedPage, visitedPage + itemsPerPage).map(element => {
+    return (
+      <tr key={element.id}>
+        <td key={element.id + 'id'}> {element.id} </td>
+        <td key={element.Name}>
+          <Link key={element.id + element.id} to={`/${element.id}`} className={'table-link'}>
+            {element.Name}
+          </Link>
+        </td>
+        <td key={element.Surname}>{element.Surname}</td>
+        <td key={element.City}>{element.City}</td>
+        <td key={element.salary}>{element.salary}</td>
+        <td key={element.Phone_no}>{element.Phone_no}</td>
+      </tr>
+    )
+  })
+
+  function nextBtnHandler() {
+    if (pageNumber == pageCount - 1) {
+      return setPagesNumber(pageCount - 1)
+    } else {
+      return setPagesNumber(pageNumber + 1)
+    }
+  }
+
+  function prevBtnHandler() {
+    if (pageNumber == 0) {
+      return setPagesNumber(0)
+    } else {
+      return setPagesNumber(pageNumber - 1)
+    }
+  }
+
+  function paginationBtnsHandler(page) {
+    setPagesNumber(page - 1)
+  }
+
+  function Pagination() {
+    const pages = []
+
+    for (let i = 1; i <= pageCount; i++) {
+      pages.push(i)
+    }
+
+    const listItems = pages.map(page => (
+      <span onClick={() => paginationBtnsHandler(page)} className="paginationBtns" key={page}>
+        {page}
+      </span>
+    ))
+
+    return (
+      <div className="pagination">
+        <span onClick={prevBtnHandler} className="paginationBtns">
+          Prev
+        </span>
+        {listItems}
+        <span onClick={nextBtnHandler} className="paginationBtns">
+          Next
+        </span>
+      </div>
+    )
+  }
 
   function sortTableByField(id) {
     const sortDir = sortDirection === 'asc' ? 1 : -1
@@ -50,6 +118,7 @@ function Homepage() {
   return (
     <>
       <h1>Data list</h1>
+      <Pagination />
       <table className="table">
         <thead>
           <tr>
@@ -79,22 +148,7 @@ function Homepage() {
             </th>
           </tr>
         </thead>
-        <tbody>
-          {data.map(element => (
-            <tr key={element.id}>
-              <td key={element.id + 'id'}> {element.id} </td>
-              <td key={element.Name}>
-                <Link key={element.id + element.id} to={`/${element.id}`} className={'table-link'}>
-                  {element.Name}
-                </Link>
-              </td>
-              <td key={element.Surname}>{element.Surname}</td>
-              <td key={element.City}>{element.City}</td>
-              <td key={element.salary}>{element.salary}</td>
-              <td key={element.Phone_no}>{element.Phone_no}</td>
-            </tr>
-          ))}
-        </tbody>
+        <tbody>{displayData}</tbody>
       </table>
     </>
   )
